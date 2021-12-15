@@ -7,7 +7,7 @@ Then run
 ruby test.rb
 ```
 
-###Response
+### Response
 
 ```
 PING
@@ -16,7 +16,7 @@ PONG
 ```
 ----
 
-###Steps for Encryption
+### Steps for Encryption
 
 1.	Generate 32 digit random number. Say RANDOMNO1.
 2.	Encrypt RANDOMNO1 using RSA/ECB/PKCS1Padding and AXB Public Key.
@@ -38,7 +38,7 @@ Request Packet Sample:
 
 -------
 
-###Steps for Decryption
+### Steps for Decryption
 
 1. Base64 Decode the encrypted_key.
 2. Decrypt the output of step 1 using (RSA/ECB/PKCS1) and the your Private Key.
