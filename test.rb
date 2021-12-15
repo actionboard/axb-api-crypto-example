@@ -11,8 +11,8 @@ iv   = SecureRandom.hex(8) #16 digit random number
 text = "PING"
 
 # you have to encrypt data using +our_public_key+ which we provided
-encrypted_key  = Crypto::Asymmetric.public_encrypt(File.read("/Users/sa/RailsProjects/axb-api-crypto-example/keys/dist1/public.pem"), key)
-encrypted_iv   = Crypto::Asymmetric.public_encrypt(File.read("/Users/sa/RailsProjects/axb-api-crypto-example/keys/dist1/public.pem"), iv)
+encrypted_key  = Crypto::Asymmetric.public_encrypt(File.read("./keys/dist1/public.pem"), key)
+encrypted_iv   = Crypto::Asymmetric.public_encrypt(File.read("./keys/dist1/public.pem"), iv)
 encrypted_text = Crypto::Symmetric.encrypt(key, iv, text)
 
 # Sending this payload to Actionboard
@@ -29,8 +29,8 @@ pay_key  = Base64.strict_decode64(payload['encrypted_key'])
 pay_iv   = Base64.strict_decode64(payload['encrypted_iv'])
 pay_text = Base64.strict_decode64(payload['encrypted_data'])
 
-key  = Crypto::Asymmetric.private_decrypt(File.read("/Users/sa/RailsProjects/axb-api-crypto-example/keys/dist1/private.pem"), pay_key)
-iv   = Crypto::Asymmetric.private_decrypt(File.read("/Users/sa/RailsProjects/axb-api-crypto-example/keys/dist1/private.pem"), pay_iv)
+key  = Crypto::Asymmetric.private_decrypt(File.read("./keys/dist1/private.pem"), pay_key)
+iv   = Crypto::Asymmetric.private_decrypt(File.read("./keys/dist1/private.pem"), pay_iv)
 text = Crypto::Symmetric.decrypt(key, iv, pay_text)
 puts text
 
@@ -45,8 +45,8 @@ if text == 'PING'
   iv   = SecureRandom.hex(8) #16 digit random number
   text = "PONG"
 
-  encrypted_key  = Crypto::Asymmetric.public_encrypt(File.read("/Users/sa/RailsProjects/axb-api-crypto-example/keys/dist2/public.pem"), key)
-  encrypted_iv   = Crypto::Asymmetric.public_encrypt(File.read("/Users/sa/RailsProjects/axb-api-crypto-example/keys/dist2/public.pem"), iv)
+  encrypted_key  = Crypto::Asymmetric.public_encrypt(File.read("./keys/dist2/public.pem"), key)
+  encrypted_iv   = Crypto::Asymmetric.public_encrypt(File.read("./keys/dist2/public.pem"), iv)
   encrypted_text = Crypto::Symmetric.encrypt(key, iv, text)
 
   #Actionboard will send this response to you
@@ -63,8 +63,8 @@ if text == 'PING'
   res_iv   = Base64.strict_decode64(response['encrypted_iv'])
   res_text = Base64.strict_decode64(response['encrypted_data'])
 
-  key  = Crypto::Asymmetric.private_decrypt(File.read("/Users/sa/RailsProjects/axb-api-crypto-example/keys/dist2/private.pem"), res_key)
-  iv   = Crypto::Asymmetric.private_decrypt(File.read("/Users/sa/RailsProjects/axb-api-crypto-example/keys/dist2/private.pem"), res_iv)
+  key  = Crypto::Asymmetric.private_decrypt(File.read("./keys/dist2/private.pem"), res_key)
+  iv   = Crypto::Asymmetric.private_decrypt(File.read("./keys/dist2/private.pem"), res_iv)
   text = Crypto::Symmetric.decrypt(key, iv, res_text)
   puts text
 
